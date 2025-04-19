@@ -24,3 +24,20 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Add these styles to ensure text visibility */
+input, select, option {
+  color: #111827 !important; /* Force dark text color */
+}
+
+td, th {
+  color: #111827; /* Default dark text for table cells */
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  color: #111827; /* Default dark text for headings and paragraphs */
+}
+
+p.text-gray-500 {
+  color: #6b7280 !important; /* Keep gray text dark enough to be visible */
+}
