@@ -94,6 +94,11 @@ export default function Dashboard() {
   const navigateToCreateWork = () => {
     router.push('/create-work');
   };
+  
+  // Function to navigate to reports page
+  const navigateToReports = () => {
+    router.push('/reports');
+  };
 
   if (loading || !user) {
     return <div>Loading...</div>;
@@ -288,7 +293,10 @@ export default function Dashboard() {
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4 text-gray-900">View Reports</h2>
             <p className="mb-4 text-gray-700">Access detailed reports and analytics on work progress.</p>
-            <button className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 w-full">
+            <button 
+              onClick={navigateToReports}
+              className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 w-full"
+            >
               View Reports
             </button>
           </div>
