@@ -1,13 +1,8 @@
 'use client';
 
 import { createContext, useState, useContext, useEffect } from 'react';
-
-// Demo user data (replace with actual authentication in a real app)
-const DEMO_USERS = [
-  { username: 'collector1', password: 'password', role: 'collector' },
-  { username: 'depthead1', password: 'password', role: 'deptHead' },
-  { username: 'worker1', password: 'password', role: 'endOfficeWorker' },
-];
+// Fix: Import directly from default export
+import users from '@/data/usersData';
 
 const AuthContext = createContext();
 
@@ -32,26 +27,30 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = (username, password, role) => {
-    // Find user with matching credentials
-    const foundUser = DEMO_USERS.find(
+    // Find user with matching credentials from JS data
+    const foundUser = users.find(
       user => user.username === username && 
               user.password === password && 
               user.role === role
     );
 
     if (foundUser) {
-      const userData = {
+      // Create a safe user object without the password
+      const safeUserData = {
+        id: foundUser.id,
         username: foundUser.username,
         role: foundUser.role,
+        fullName: foundUser.fullName,
+        department: foundUser.department
       };
       
       // Save user data to state and localStorage
-      setUser(userData);
+      setUser(safeUserData);
       
       // Only access localStorage on the client
       if (typeof window !== 'undefined') {
         try {
-          localStorage.setItem('user', JSON.stringify(userData));
+          localStorage.setItem('user', JSON.stringify(safeUserData));
         } catch (error) {
           console.error('Error writing to localStorage', error);
         }

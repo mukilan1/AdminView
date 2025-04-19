@@ -3,27 +3,28 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+// Fix: Import directly from default export
+import assignments from '@/data/assignmentsData';
 
 export default function Assignments() {
   const { user, logout, loading } = useAuth();
   const router = useRouter();
-  const [assignments, setAssignments] = useState([]);
+  const [userAssignments, setUserAssignments] = useState([]);
 
   useEffect(() => {
     if (!loading && (!user || user.role !== 'endOfficeWorker')) {
       router.push('/login');
     } else if (user) {
-      // Mock data - would come from API in real app
-      setAssignments([
-        { id: 1, title: 'Document Review', status: 'pending', deadline: '2023-12-15' },
-        { id: 2, title: 'Field Inspection', status: 'in-progress', deadline: '2023-12-20' },
-        { id: 3, title: 'Report Filing', status: 'pending', deadline: '2023-12-25' }
-      ]);
+      // Filter assignments for the current user from the JS data
+      const filteredAssignments = assignments.filter(
+        assignment => assignment.assignedTo === user.username
+      );
+      setUserAssignments(filteredAssignments);
     }
   }, [user, loading, router]);
 
   const updateStatus = (id, newStatus) => {
-    setAssignments(assignments.map(a => 
+    setUserAssignments(userAssignments.map(a => 
       a.id === id ? {...a, status: newStatus} : a
     ));
   };
@@ -37,7 +38,7 @@ export default function Assignments() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">My Assignments</h1>
         <div>
-          <span className="mr-4">Welcome, {user.username}</span>
+          <span className="mr-4">Welcome, {user.fullName}</span>
           <button 
             onClick={logout}
             className="bg-red-500 text-white px-4 py-2 rounded"
@@ -52,15 +53,18 @@ export default function Assignments() {
           <thead>
             <tr className="bg-gray-100 border-b">
               <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Title</th>
+              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Description</th>
               <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Status</th>
+              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Priority</th>
               <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Deadline</th>
               <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {assignments.map(assignment => (
+            {userAssignments.map(assignment => (
               <tr key={assignment.id} className="border-b hover:bg-gray-50">
                 <td className="px-6 py-4">{assignment.title}</td>
+                <td className="px-6 py-4">{assignment.description}</td>
                 <td className="px-6 py-4">
                   <span className={`px-2 py-1 rounded text-xs ${
                     assignment.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
@@ -68,6 +72,15 @@ export default function Assignments() {
                     'bg-green-100 text-green-800'
                   }`}>
                     {assignment.status}
+                  </span>
+                </td>
+                <td className="px-6 py-4">
+                  <span className={`px-2 py-1 rounded text-xs ${
+                    assignment.priority === 'high' ? 'bg-red-100 text-red-800' :
+                    assignment.priority === 'medium' ? 'bg-orange-100 text-orange-800' :
+                    'bg-green-100 text-green-800'
+                  }`}>
+                    {assignment.priority}
                   </span>
                 </td>
                 <td className="px-6 py-4">{assignment.deadline}</td>
