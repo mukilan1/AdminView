@@ -90,6 +90,11 @@ export default function Dashboard() {
     setStatusFilter('');
   };
 
+  // Function to navigate to create work page
+  const navigateToCreateWork = () => {
+    router.push('/create-work');
+  };
+
   if (loading || !user) {
     return <div>Loading...</div>;
   }
@@ -272,7 +277,10 @@ export default function Dashboard() {
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4 text-gray-900">Create New Work</h2>
             <p className="mb-4 text-gray-700">Assign and create new work items for office workers.</p>
-            <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full">
+            <button 
+              onClick={navigateToCreateWork}
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full"
+            >
               Create Work
             </button>
           </div>
