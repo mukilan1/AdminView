@@ -14,13 +14,6 @@
 - **Language:** JavaScript / TypeScript
 - **Styling:** Tailwind CSS (or your preferred CSS framework)
 
-## Getting Started
-
-```bash
-git clone https://github.com/your-username/AdminView.git
-cd AdminView
-npm install
-npm run dev
 ![image](https://github.com/user-attachments/assets/73c0c62c-ea1d-45a3-a53f-511f98105e14)
 ![image](https://github.com/user-attachments/assets/4a6381d3-0d4a-4a7c-a71c-6886fed39aee)
 ![image](https://github.com/user-attachments/assets/434b03ba-7486-4038-b095-db14d65e2cb1)
@@ -31,3 +24,12 @@ npm run dev
 ![image](https://github.com/user-attachments/assets/a31e1a72-6807-4f8f-ac96-13428dc7f957)
 ![image](https://github.com/user-attachments/assets/a06658e2-cc2c-4a2c-b1f4-685fb0dfc501)
 ![image](https://github.com/user-attachments/assets/1ca68938-486f-4791-8a82-78f177e08e0a)
+
+## Getting Started
+
+```bash
+git clone https://github.com/your-username/AdminView.git
+cd AdminView
+npm install
+npm run dev
+
