@@ -25,11 +25,4 @@
 ![image](https://github.com/user-attachments/assets/a06658e2-cc2c-4a2c-b1f4-685fb0dfc501)
 ![image](https://github.com/user-attachments/assets/1ca68938-486f-4791-8a82-78f177e08e0a)
 
-## Getting Started
-
-```bash
-git clone https://github.com/your-username/AdminView.git
-cd AdminView
-npm install
-npm run dev
 
